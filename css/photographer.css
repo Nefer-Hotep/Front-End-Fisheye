@@ -1,11 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
+    display: flex;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+}
+
+.photograph-header article {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
+    padding: 0px 50px 0px 50px
+}
+
+.photograph-header article img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow-clip-margin: unset;
+}
+
+.photograph-name {
+    color: #D3573C;
+    font-size: 64px;
+    font-weight: 400;
+    margin: 0px;
+}
+
+.photograph-location {
+    font-weight: 400;
+    font-size: 24px;
+    color: #901C1C;
+}
+
+.photograph-tagline {
+    font-weight: 400;
+    font-size: 18px;
+    color: #525252;
 }
 
 .contact_button {
