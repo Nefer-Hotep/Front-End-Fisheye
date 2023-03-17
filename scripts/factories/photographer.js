@@ -48,11 +48,16 @@ function photographerFactory(data) {
         article.innerHTML = `
             <div class='photograph-text'>
                 <h1 class='photograph-name'>${name}</h1>
-                <p class='photograph-location'>${city + ',' + country}</p>
+                <p class='photograph-location'>${city + ', ' + country}</p>
                 <p class='photograph-tagline'>${tagline}</p>
             </div>
             <button class="contact_button" onclick="displayModal()" aria-label="contact me">Contactez-moi</button>
             <img src='${picture}' alt='${name}'>
+            <div class='sticky-bar'>
+                <div class='sticky-text'>
+                    <p>${price}€ / jour</p>
+                </div>
+            </div>
         `;
 
         return article;
