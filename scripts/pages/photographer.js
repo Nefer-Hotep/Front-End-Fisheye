@@ -24,7 +24,7 @@ async function getMedia(urlId) {
         .catch((err) => console.log('an error occurs' + err));
 }
 
-async function displayPhotographer(photographer) {
+function displayPhotographer(photographer) {
     const photographerHeader = document.querySelector('.photograph-header');
 
     const photographerModel = photographerFactory(photographer);
@@ -32,7 +32,7 @@ async function displayPhotographer(photographer) {
     photographerHeader.appendChild(photographHeaderDOM);
 }
 
-async function displayMedia(medias) {
+function displayMedia(medias) {
     
     const mediaElement = document.getElementById('main');
     const card = document.createElement('div')
@@ -47,13 +47,23 @@ async function displayMedia(medias) {
         card.appendChild(mediaCardDOM)
     })
 
-    const stickyElement = document.querySelector('.sticky-bar')
+    // Display total likes
+    const stickyElement = document.querySelector('.sticky-text')
     const totalLikesElement = document.createElement('p')
-    stickyElement.appendChild(totalLikesElement)
+    const heartElement = document.createElement('i')
 
-
-    const reducer = (accumulator, curr) => accumulator + curr;
-    // totalLikesElement.textContent = medias.likes.reduce(reducer)
+    console.log(heartElement);
+    heartElement.setAttribute('class', 'fa-solid fa-heart')
+    
+    stickyElement.appendChild(totalLikesElement)    
+    stickyElement.appendChild(heartElement);
+    
+    const totalLikes = medias.reduce((total, media) => {
+        return total + media.likes
+    }, 0);
+    
+    totalLikesElement.textContent = totalLikes
+    
 }
 
 async function init() {

@@ -10,7 +10,7 @@ async function getPhotographers() {
         .catch((err) => console.log('an error occurs' + err));
 }
 
-async function displayData(photographers) {
+function displayData(photographers) {
     const photographersSection = document.querySelector(
         '.photographer_section'
     );

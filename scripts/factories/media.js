@@ -11,7 +11,7 @@ function mediaFactory(mediaData) {
 
         if (image){
             mediaCard.innerHTML = `
-                <img src='${mediaPic}' alt='${title}, closeup view'>
+                <img src='${mediaPic}' alt='${title}'>
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
@@ -22,7 +22,7 @@ function mediaFactory(mediaData) {
             `;
         } else {
             mediaCard.innerHTML = `
-                <video src='${mediaVid}'></video>
+                <video src='${mediaVid}' title='${title}'></video>
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
