@@ -1,7 +1,7 @@
 function mediaFactory(mediaData) {
     const { id, title, image, video, date, likes, price, photographerId } =
         mediaData;
-            
+
     const mediaPic = `/assets/media/${photographerId}/${image}`;
     const mediaVid = `/assets/media/${photographerId}/${video}`;
 
@@ -9,9 +9,11 @@ function mediaFactory(mediaData) {
         const mediaCard = document.createElement('div');
         mediaCard.setAttribute('class', 'card-body');
 
-        if (image){
+        if (image) {
             mediaCard.innerHTML = `
-                <img src='${mediaPic}' alt='${title}'>
+                <a href='${mediaPic}' class='lightbox-link' aria-label='${title}, closeup view'>
+                    <img src='${mediaPic}' alt='${title}'>
+                </a>
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
@@ -22,7 +24,9 @@ function mediaFactory(mediaData) {
             `;
         } else {
             mediaCard.innerHTML = `
-                <video src='${mediaVid}' title='${title}'></video>
+                <a href='${mediaVid}' class='lightbox-link' aria-label='${title}, closeup view'>
+                    <video src='${mediaVid}' title='${title}'></video>
+                </a>    
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
@@ -31,11 +35,10 @@ function mediaFactory(mediaData) {
                     </div>
                 </div>
             `;
-
         }
 
         return mediaCard;
     }
-
+    
     return { getMediaCardDOM };
 }

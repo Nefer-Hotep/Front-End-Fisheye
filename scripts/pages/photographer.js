@@ -33,37 +33,38 @@ function displayPhotographer(photographer) {
 }
 
 function displayMedia(medias) {
-    
     const mediaElement = document.getElementById('main');
-    const card = document.createElement('div')
+    const card = document.createElement('div');
 
-    card.setAttribute('id', 'card')
-    mediaElement.appendChild(card)
+    card.setAttribute('id', 'card');
+    mediaElement.appendChild(card);
 
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media);
-        const mediaCardDOM = mediaModel.getMediaCardDOM()
-        
-        card.appendChild(mediaCardDOM)
-    })
+        const mediaCardDOM = mediaModel.getMediaCardDOM();
 
-    // Display total likes
-    const stickyElement = document.querySelector('.sticky-text')
-    const totalLikesElement = document.createElement('p')
-    const heartElement = document.createElement('i')
+        card.appendChild(mediaCardDOM);
+    });
 
-    console.log(heartElement);
-    heartElement.setAttribute('class', 'fa-solid fa-heart')
     
-    stickyElement.appendChild(totalLikesElement)    
+}
+
+function displayTotalLikes(medias) {
+    const stickyElement = document.querySelector('.sticky-text');
+    const totalLikesElement = document.createElement('p');
+    const heartElement = document.createElement('i');
+
+    heartElement.setAttribute('class', 'fa-solid fa-heart');
+
+    stickyElement.appendChild(totalLikesElement);
     stickyElement.appendChild(heartElement);
-    
+
+    // Take all the likes and put it in the total
     const totalLikes = medias.reduce((total, media) => {
-        return total + media.likes
+        return total + media.likes;
     }, 0);
-    
-    totalLikesElement.textContent = totalLikes
-    
+
+    totalLikesElement.textContent = totalLikes;
 }
 
 async function init() {
@@ -75,6 +76,8 @@ async function init() {
 
     displayPhotographer(photographer);
     displayMedia(media);
+    displayTotalLikes(media)
+    lightbox()
 }
 
 init();

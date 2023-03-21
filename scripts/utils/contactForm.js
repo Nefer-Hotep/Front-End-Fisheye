@@ -10,7 +10,7 @@ function displayModal() {
     header.setAttribute('aria-hidden', true);
     contactModal.setAttribute('aria-hidden', false);
     contactModal.style.display = 'block';
-    firstNameEl.focus(); //set the focus on the close button
+    firstNameEl.focus(); //définie le focus sur le bouton de
 }
 
 function closeModal() {
@@ -21,10 +21,14 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// Add event listener to the document object
+// Gère la fermeture du formualaire
 document.addEventListener('keydown', (event) => {
-    // Check if the key code is equal to "Escape" (Esc key)
+    // Vérifie que l'event est bien sur le bouton "Escape" (Esc key)
     if (event.key === 'Escape') {
         closeModal();
     }
 });
+
+function validate() {
+    console.log('validé');
+}
