@@ -77,7 +77,7 @@ async function init() {
     displayPhotographer(photographer);
     displayMedia(media);
     displayTotalLikes(media)
-    lightbox()
+    lightbox(media)
 }
 
 init();
