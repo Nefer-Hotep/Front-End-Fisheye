@@ -1,9 +1,33 @@
-function mediaFactory(mediaData) {
+function mediaFactory(mediaData, updateTotalLikes) {
     const { id, title, image, video, date, likes, price, photographerId } =
         mediaData;
 
     const mediaPic = `/assets/media/${photographerId}/${image}`;
     const mediaVid = `/assets/media/${photographerId}/${video}`;
+
+    let currentLikes = likes;
+    let isLiked = false;
+
+    function listenForLikes(event) {
+        event.preventDefault();
+
+        isLiked = !isLiked; // Inverse le statut booléen de isLiked true/false
+        currentLikes = isLiked ? currentLikes + 1 : currentLikes - 1; // Si isLiked est true ajoute +1 sinon -1 aux likes
+
+        const likeBtn = event.currentTarget;
+        const mediaLikes = likeBtn.parentElement;
+        const likeCountElement = mediaLikes.querySelector('p');
+        likeCountElement.textContent = currentLikes;
+
+        const heartIcon = likeBtn.querySelector('i');
+        heartIcon.classList.toggle('fa-regular');
+        heartIcon.classList.toggle('fa-solid');
+
+        updateTotalLikes(isLiked ? 1 : -1)
+
+
+        return currentLikes;
+    }
 
     function getMediaCardDOM() {
         const mediaCard = document.createElement('div');
@@ -17,8 +41,10 @@ function mediaFactory(mediaData) {
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
-                        <p>${likes}</p>
-                        <i class="fa-solid fa-heart"></i>
+                        <p>${currentLikes}</p>
+                        <button class='like-btn'>
+                            <i class="unchecked fa-regular fa-heart fa-lg"></i>
+                        </button>
                     </div>
                 </div>
             `;
@@ -30,15 +56,20 @@ function mediaFactory(mediaData) {
                 <div class='media-text'>
                     <p>${title}</p>
                     <div class='media-likes'>
-                        <p>${likes}</p>
-                        <i class="fa-solid fa-heart"></i>
+                        <p>${currentLikes}</p>
+                        <button class='like-btn'>
+                            <i class="unchecked fa-regular fa-heart fa-lg"></i>
+                        </button>
                     </div>
                 </div>
             `;
         }
 
+        const likeBtn = mediaCard.querySelector('.like-btn');
+        likeBtn.addEventListener('click', listenForLikes);
+
         return mediaCard;
     }
-    
-    return { getMediaCardDOM };
+
+    return { getMediaCardDOM, currentLikes };
 }

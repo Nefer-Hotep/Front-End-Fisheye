@@ -1,4 +1,4 @@
-//Mettre le code JavaScript lié à la page photographer.html
+//Récupère les données d'un photographe avec l'id de l'url
 async function getPhotographer(urlId) {
     return fetch('data/photographers.json')
         .then((res) => res.json())
@@ -12,6 +12,7 @@ async function getPhotographer(urlId) {
         .catch((err) => console.log('an error occurs' + err));
 }
 
+// Filtre dans les médias avec l'id de l'url
 async function getMedia(urlId) {
     return fetch('data/photographers.json')
         .then((res) => res.json())
@@ -24,6 +25,7 @@ async function getMedia(urlId) {
         .catch((err) => console.log('an error occurs' + err));
 }
 
+// Affiche les informations du photographe
 function displayPhotographer(photographer) {
     const photographerHeader = document.querySelector('.photograph-header');
 
@@ -32,6 +34,7 @@ function displayPhotographer(photographer) {
     photographerHeader.appendChild(photographHeaderDOM);
 }
 
+// Affiche les médias du photographe
 function displayMedia(medias) {
     const mediaElement = document.getElementById('main');
     const card = document.createElement('div');
@@ -40,33 +43,41 @@ function displayMedia(medias) {
     mediaElement.appendChild(card);
 
     medias.forEach((media) => {
-        const mediaModel = mediaFactory(media);
+        const mediaModel = mediaFactory(media, updateTotalLikes);
         const mediaCardDOM = mediaModel.getMediaCardDOM();
 
         card.appendChild(mediaCardDOM);
     });
-
-    
 }
 
+// Gère l'affichage du total de likes
 function displayTotalLikes(medias) {
-    const stickyElement = document.querySelector('.sticky-text');
-    const totalLikesElement = document.createElement('p');
-    const heartElement = document.createElement('i');
+    const stickyEl = document.querySelector('.sticky-text');
+    const totalLikesEl = document.createElement('p');
+    const heartEl = document.createElement('i');
 
-    heartElement.setAttribute('class', 'fa-solid fa-heart');
+    heartEl.setAttribute('class', 'fa-solid fa-heart');
+    totalLikesEl.setAttribute('class', 'total-likes')
 
-    stickyElement.appendChild(totalLikesElement);
-    stickyElement.appendChild(heartElement);
+    stickyEl.appendChild(totalLikesEl);
+    stickyEl.appendChild(heartEl);
 
-    // Take all the likes and put it in the total
+    // Récupère le total de tous les likes du tableau medias 
     const totalLikes = medias.reduce((total, media) => {
         return total + media.likes;
     }, 0);
 
-    totalLikesElement.textContent = totalLikes;
+    totalLikesEl.textContent = totalLikes;
 }
 
+// Met à jour le total de like 
+function updateTotalLikes(change) {
+    const totalLikesElement = document.querySelector('.total-likes');
+    const currentTotalLikes = parseInt(totalLikesElement.textContent, 10); // transforme le total d'une string à un interger
+    totalLikesElement.textContent = currentTotalLikes + change;
+}
+
+// Récupère et initialise les données
 async function init() {
     const urlSearchParams = new URL(document.location).searchParams;
     const urlId = urlSearchParams.get('');

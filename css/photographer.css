@@ -198,3 +198,19 @@ textarea {
     height: 170px;
     resize: none;
 }
+
+.like-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+   
+}
+
+.like-btn i {
+    line-height: normal;
+    color: #901c1c;
+}
+
+.checked-active {
+    opacity: 1;
+}

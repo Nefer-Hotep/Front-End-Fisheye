@@ -12,34 +12,22 @@ function lightbox() {
         lightboxDom.remove();
     }
 
-    function nextMedia(indexMedia) {
-        const currentLink = Array.from(lightboxLinks).findIndex(
-            (index) => index === indexMedia
-        );
-        // console.log('index', index);
-        console.log('currentLink', currentLink);
-
-        const nextLink =
-            lightboxLinks[(currentLink + 1) % lightboxLinks.length];
-        const nextMediaUrl = nextLink.href;
-        const nextMediaAlt = nextLink.getAttribute('aria-label');
-        createLightbox(nextMediaUrl, nextMediaAlt);
-    }
-
-    function prevMedia(mediaUrl) {
+    // Change de média selon la direction donnée (1 || -1)
+    function changeMedia(mediaUrl, direction) {
         const currentLink = Array.from(lightboxLinks).findIndex(
             (link) => link.href === mediaUrl
         );
-        const prevLink =
+        const newLink =
             lightboxLinks[
-                (currentLink - 1 + lightboxLinks.length) % lightboxLinks.length
+                (currentLink + direction + lightboxLinks.length) %
+                    lightboxLinks.length
             ];
-        const prevMediaUrl = prevLink.href;
-        const prevMediaAlt = prevLink.getAttribute('aria-label');
-        createLightbox(prevMediaUrl, prevMediaAlt);
+        const newMediaUrl = newLink.href;
+        const newMediaAlt = newLink.getAttribute('aria-label');
+        createLightbox(newMediaUrl, newMediaAlt);
     }
 
-    function createLightbox(mediaUrl, mediaAlt, index) {
+    function createLightbox(mediaUrl, mediaAlt) {
         mainWrapper.setAttribute('aria-hidden', true);
         header.setAttribute('aria-hidden', true);
 
@@ -58,45 +46,45 @@ function lightbox() {
 
         lightboxDom
             .querySelector('.lightbox-next')
-            .addEventListener('click', () => {
-                nextMedia(index);
-            });
-
+            .addEventListener('click', () =>
+                changeMedia(getCurrentMediaUrl(), 1)
+            );
         lightboxDom
             .querySelector('.lightbox-prev')
-            .addEventListener('click', () => {
-                prevMedia(index);
-            });
-
+            .addEventListener('click', () =>
+                changeMedia(getCurrentMediaUrl(), -1)
+            );
         lightboxDom
             .querySelector('.lightbox-close')
-            .addEventListener('click', () => {
-                closeLightbox();
-            });
-
+            .addEventListener('click', closeLightbox);
         card.appendChild(lightboxDom);
-
-        return lightboxDom;
     }
 
-    // Ferme la lightbox quand on appuie sur "Escape"
+    function getCurrentMediaUrl() {
+        const currentMediaElement = lightboxDom.querySelector('img, video');
+        return (
+            currentMediaElement.src ||
+            currentMediaElement.querySelector('source').src
+        );
+    }
+
     document.addEventListener('keydown', (e) => {
-        // Vérifie que l'event est bien sur le bouton "Escape" (Esc key)
         if (e.key === 'Escape') {
             closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+            changeMedia(getCurrentMediaUrl(), 1);
+        } else if (e.key === 'ArrowLeft') {
+            changeMedia(getCurrentMediaUrl(), -1);
         }
     });
 
-    // Attach event listeners to links and close button
-    lightboxLinks.forEach((link, index) => {
+    lightboxLinks.forEach((link) => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-
-            const mediaUrl = link.getAttribute('href');
-            const mediaAlt = link.getAttribute('aria-label');
-            const mediaTitle = link.getAttribute('alt');
-
-            createLightbox(mediaUrl, mediaAlt, index);
+            createLightbox(
+                link.getAttribute('href'),
+                link.getAttribute('aria-label')
+            );
         });
     });
 }
