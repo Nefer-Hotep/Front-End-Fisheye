@@ -8,14 +8,15 @@ function mediaFactory(mediaData, updateTotalLikes) {
     let currentLikes = likes;
     let isLiked = false;
 
+    // Gère la logique des likes reçu
     function listenForLikes(event) {
         event.preventDefault();
 
         isLiked = !isLiked; // Inverse le statut booléen de isLiked true/false
         currentLikes = isLiked ? currentLikes + 1 : currentLikes - 1; // Si isLiked est true ajoute +1 sinon -1 aux likes
 
-        const likeBtn = event.currentTarget;
-        const mediaLikes = likeBtn.parentElement;
+        const likeBtn = event.currentTarget; // Défini le bouton en fonction de l'evenement reçu
+        const mediaLikes = likeBtn.parentElement; // Récupère l'élement parent du bouton
         const likeCountElement = mediaLikes.querySelector('p');
         likeCountElement.textContent = currentLikes;
 
@@ -23,12 +24,13 @@ function mediaFactory(mediaData, updateTotalLikes) {
         heartIcon.classList.toggle('fa-regular');
         heartIcon.classList.toggle('fa-solid');
 
-        updateTotalLikes(isLiked ? 1 : -1)
-
+        // Renvoi en paramètre si true 1 sinon -1
+        updateTotalLikes(isLiked ? 1 : -1);
 
         return currentLikes;
     }
 
+    // Crée le dom des cards en fonction du format reçu
     function getMediaCardDOM() {
         const mediaCard = document.createElement('div');
         mediaCard.setAttribute('class', 'card-body');
@@ -65,6 +67,7 @@ function mediaFactory(mediaData, updateTotalLikes) {
             `;
         }
 
+        // Récupère les events de tout les boutons de like
         const likeBtn = mediaCard.querySelector('.like-btn');
         likeBtn.addEventListener('click', listenForLikes);
 

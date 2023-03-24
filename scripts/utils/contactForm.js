@@ -1,9 +1,14 @@
-// Dom variables
+// 
+// Gère le formulaire
+// 
+// DOM
 const header = document.getElementById('header');
 const mainWrapper = document.getElementById('main');
 const modal = document.querySelector('.modal');
 const firstNameEl = document.getElementById('firstName');
 
+// FUNCTION
+// Gère l'affichage de la modal
 function displayModal() {
     const contactModal = document.getElementById('contact_modal');
     mainWrapper.setAttribute('aria-hidden', true);
@@ -13,6 +18,7 @@ function displayModal() {
     firstNameEl.focus(); //définie le focus sur le bouton de
 }
 
+// Gère la fermeture de la modal
 function closeModal() {
     const modal = document.getElementById('contact_modal');
     mainWrapper.setAttribute('aria-hidden', false);
@@ -21,7 +27,7 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// Gère la fermeture du formualaire
+// Gère l'interation clavier
 document.addEventListener('keydown', (event) => {
     // Vérifie que l'event est bien sur le bouton "Escape" (Esc key)
     if (event.key === 'Escape') {
@@ -29,6 +35,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Valide les données du formulaire
 function validate() {
     console.log('validé');
 }

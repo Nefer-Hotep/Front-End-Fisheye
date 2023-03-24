@@ -73,7 +73,7 @@ function displayTotalLikes(medias) {
 // Met à jour le total de like 
 function updateTotalLikes(change) {
     const totalLikesElement = document.querySelector('.total-likes');
-    const currentTotalLikes = parseInt(totalLikesElement.textContent, 10); // transforme le total d'une string à un interger
+    const currentTotalLikes = parseInt(totalLikesElement.textContent, 10); // transforme le total d'une string en un interger
     totalLikesElement.textContent = currentTotalLikes + change;
 }
 
