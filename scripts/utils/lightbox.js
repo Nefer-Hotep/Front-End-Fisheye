@@ -10,6 +10,7 @@ function lightbox() {
         "a[href$='.jpg'], a[href$='.png'], a[href$='.mp4']"
     );
     const card = document.getElementById('card');
+
     const lightboxDom = document.createElement('div');
     lightboxDom.classList.add('lightbox');
 
@@ -32,11 +33,13 @@ function lightbox() {
             ];
         const newMediaUrl = newLink.href;
         const newMediaAlt = newLink.getAttribute('aria-label');
+        
         createLightbox(newMediaUrl, newMediaAlt);
     }
 
     // Créer une lightbox selon le média reçu en paramètre
     function createLightbox(mediaUrl, mediaAlt) {
+        
         mainWrapper.setAttribute('aria-hidden', true);
         header.setAttribute('aria-hidden', true);
 
@@ -46,18 +49,20 @@ function lightbox() {
             : `<img src="${mediaUrl}" alt="${mediaAlt}">`;
 
         lightboxDom.innerHTML = `
-        <button class="lightbox-close">Fermer</button>
-        <button class="lightbox-next">Suivant</button>
-        <button class="lightbox-prev">Précédent</button>
+        <button class="lightbox-close" aria-label="Close dialog"></button>
+        <button class="lightbox-next" aria-label="Next image"></button>
+        <button class="lightbox-prev" aria-label="Previous image"></button>
         <div class="lightbox-container">
             ${mediaElement}
+            <p>Text</p>
         </div>
         `;
 
         // Ecoute le bouton NEXT
         lightboxDom.querySelector('.lightbox-next').addEventListener(
             'click',
-            () => changeMedia(getCurrentMediaUrl(), 1) // Récupère le currentMédiaUrl et la direction
+            () => changeMedia(getCurrentMediaUrl(), 1)
+            // Récupère le currentMédiaUrl et la direction
         );
         // Ecoute le bouton PREV
         lightboxDom.querySelector('.lightbox-prev').addEventListener(
@@ -69,6 +74,17 @@ function lightbox() {
             .querySelector('.lightbox-close')
             .addEventListener('click', closeLightbox);
         card.appendChild(lightboxDom);
+
+        // Gère les interactions clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+                changeMedia(getCurrentMediaUrl(), 1);
+            } else if (e.key === 'ArrowLeft') {
+                changeMedia(getCurrentMediaUrl(), -1);
+            }
+        });
     }
 
     // Récupère le média a l'intéraction de la lightbox
@@ -85,16 +101,6 @@ function lightbox() {
     //
     // LISTENERS
     //
-    // Gère les interactions clavier
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeLightbox();
-        } else if (e.key === 'ArrowRight') {
-            changeMedia(getCurrentMediaUrl(), 1);
-        } else if (e.key === 'ArrowLeft') {
-            changeMedia(getCurrentMediaUrl(), -1);
-        }
-    });
 
     // Gère les interactions des ancres
     lightboxLinks.forEach((link) => {

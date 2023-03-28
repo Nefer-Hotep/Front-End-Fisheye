@@ -44,8 +44,8 @@ function mediaFactory(mediaData, updateTotalLikes) {
                     <p>${title}</p>
                     <div class='media-likes'>
                         <p>${currentLikes}</p>
-                        <button class='like-btn'>
-                            <i class="unchecked fa-regular fa-heart fa-lg"></i>
+                        <button class='like-btn' aria-label="Like">
+                            <i class="unchecked fa-regular fa-heart fa-lg" ></i>
                         </button>
                     </div>
                 </div>
@@ -59,8 +59,8 @@ function mediaFactory(mediaData, updateTotalLikes) {
                     <p>${title}</p>
                     <div class='media-likes'>
                         <p>${currentLikes}</p>
-                        <button class='like-btn'>
-                            <i class="unchecked fa-regular fa-heart fa-lg"></i>
+                        <button class='like-btn' aria-label="Like">
+                            <i class="unchecked fa-regular fa-heart fa-lg" ></i>
                         </button>
                     </div>
                 </div>

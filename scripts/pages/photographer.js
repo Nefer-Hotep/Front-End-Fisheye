@@ -39,15 +39,52 @@ function displayMedia(medias) {
     const mediaElement = document.getElementById('main');
     const card = document.createElement('div');
 
+    // Select element DOM
+    const selectEl = document.createElement('div');
+
+    selectEl.innerHTML = `
+    <label for="sort-menu">Trier par </label>
+    <select id="sort-menu">
+    <option value="popularity">Popularité</option>
+    <option value="date">Date</option>
+    <option value="title">Titre</option>
+    </select>
+    `;
+
+    selectEl.setAttribute('class', 'select-elem');
+    mediaElement.appendChild(selectEl);
+
+    const sortMenu = document.getElementById('sort-menu');
+
+    function sortMedia() {
+        const selectedValue = sortMenu.value;
+
+        if (selectedValue === 'popularity') {
+            medias.sort((a, b) => b.likes - a.likes);
+        } else if (selectedValue === 'date') {
+            medias.sort((a, b) => a.date.localeCompare(b.date));
+        } else if (selectedValue === 'title') {
+            medias.sort((a, b) => a.title.localeCompare(b.title));
+        }
+
+        card.innerHTML = '';
+
+        medias.forEach((media) => {
+            const mediaModel = mediaFactory(media, updateTotalLikes);
+            const mediaCardDOM = mediaModel.getMediaCardDOM();
+
+            card.appendChild(mediaCardDOM);
+        });
+
+        lightbox();
+    }
+
     card.setAttribute('id', 'card');
     mediaElement.appendChild(card);
 
-    medias.forEach((media) => {
-        const mediaModel = mediaFactory(media, updateTotalLikes);
-        const mediaCardDOM = mediaModel.getMediaCardDOM();
+    sortMenu.addEventListener('change', sortMedia);
 
-        card.appendChild(mediaCardDOM);
-    });
+    sortMedia();
 }
 
 // Gère l'affichage du total de likes
@@ -57,12 +94,12 @@ function displayTotalLikes(medias) {
     const heartEl = document.createElement('i');
 
     heartEl.setAttribute('class', 'fa-solid fa-heart');
-    totalLikesEl.setAttribute('class', 'total-likes')
+    totalLikesEl.setAttribute('class', 'total-likes');
 
     stickyEl.appendChild(totalLikesEl);
     stickyEl.appendChild(heartEl);
 
-    // Récupère le total de tous les likes du tableau medias 
+    // Récupère le total de tous les likes du tableau medias
     const totalLikes = medias.reduce((total, media) => {
         return total + media.likes;
     }, 0);
@@ -70,7 +107,7 @@ function displayTotalLikes(medias) {
     totalLikesEl.textContent = totalLikes;
 }
 
-// Met à jour le total de like 
+// Met à jour le total de like
 function updateTotalLikes(change) {
     const totalLikesElement = document.querySelector('.total-likes');
     const currentTotalLikes = parseInt(totalLikesElement.textContent, 10); // transforme le total d'une string en un interger
@@ -87,8 +124,7 @@ async function init() {
 
     displayPhotographer(photographer);
     displayMedia(media);
-    displayTotalLikes(media)
-    lightbox(media)
+    displayTotalLikes(media);
 }
 
 init();

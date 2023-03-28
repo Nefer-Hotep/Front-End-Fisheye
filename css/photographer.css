@@ -203,7 +203,6 @@ textarea {
     border: none;
     background: transparent;
     cursor: pointer;
-   
 }
 
 .like-btn i {
@@ -213,4 +212,22 @@ textarea {
 
 .checked-active {
     opacity: 1;
+}
+
+.select-elem {
+    margin: 20px 0px 58px 100px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#sort-menu {
+    background-color: #901c1c;
+    border-radius: 5px;
+    border: none;
+    color: #fafafa;
+    font-weight: 700;
+    font-size: 18px;
+    width: 170px;
+    height: 45px;
+    padding: 5px;
 }
