@@ -37,7 +37,7 @@ function mediaFactory(mediaData, updateTotalLikes) {
 
         if (image) {
             mediaCard.innerHTML = `
-                <a href='${mediaPic}' class='lightbox-link' aria-label='${title}, closeup view'>
+                <a href='${mediaPic}' class='lightbox-link' aria-label='${title}, closeup view' data-title='${title}'>
                     <img src='${mediaPic}' alt='${title}'>
                 </a>
                 <div class='media-text'>
@@ -52,7 +52,7 @@ function mediaFactory(mediaData, updateTotalLikes) {
             `;
         } else {
             mediaCard.innerHTML = `
-                <a href='${mediaVid}' class='lightbox-link' aria-label='${title}, closeup view'>
+                <a href='${mediaVid}' class='lightbox-link' aria-label='${title}, closeup view' data-title='${title}'>
                     <video src='${mediaVid}' title='${title}'></video>
                 </a>    
                 <div class='media-text'>

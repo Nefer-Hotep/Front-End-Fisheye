@@ -55,6 +55,7 @@ function photographerFactory(data) {
             <img src='${picture}' alt='${name}'>
             <div class='sticky-bar'>
                 <div class='sticky-text'>
+                    <div class='total-likes'></div>
                     <p>${price}€ / jour</p>
                 </div>
             </div>

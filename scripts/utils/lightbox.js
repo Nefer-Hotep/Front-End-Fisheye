@@ -33,13 +33,13 @@ function lightbox() {
             ];
         const newMediaUrl = newLink.href;
         const newMediaAlt = newLink.getAttribute('aria-label');
-        
-        createLightbox(newMediaUrl, newMediaAlt);
+        const newMediaTitle = newLink.getAttribute('data-title');
+
+        createLightbox(newMediaUrl, newMediaAlt, newMediaTitle);
     }
 
     // Créer une lightbox selon le média reçu en paramètre
-    function createLightbox(mediaUrl, mediaAlt) {
-        
+    function createLightbox(mediaUrl, mediaAlt, mediaTitle) {
         mainWrapper.setAttribute('aria-hidden', true);
         header.setAttribute('aria-hidden', true);
 
@@ -54,7 +54,7 @@ function lightbox() {
         <button class="lightbox-prev" aria-label="Previous image"></button>
         <div class="lightbox-container">
             ${mediaElement}
-            <p>Text</p>
+            <p>${mediaTitle}</p>
         </div>
         `;
 
@@ -75,17 +75,23 @@ function lightbox() {
             .addEventListener('click', closeLightbox);
         card.appendChild(lightboxDom);
 
-        // Gère les interactions clavier
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowRight') {
-                changeMedia(getCurrentMediaUrl(), 1);
-            } else if (e.key === 'ArrowLeft') {
-                changeMedia(getCurrentMediaUrl(), -1);
-            }
-        });
+        // Place le focus sur le bouton next
+        const lightboxClose = document.querySelector('.lightbox-next');
+        lightboxClose.focus();
     }
+
+    console.log('soooo');
+    
+    // Gère les interactions clavier
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key == 'ArrowRight') {
+            changeMedia(getCurrentMediaUrl(), 1);
+        } else if (e.key === 'ArrowLeft') {
+            changeMedia(getCurrentMediaUrl(), -1);
+        }
+    });
 
     // Récupère le média a l'intéraction de la lightbox
     function getCurrentMediaUrl() {
@@ -108,7 +114,8 @@ function lightbox() {
             e.preventDefault();
             createLightbox(
                 link.getAttribute('href'),
-                link.getAttribute('aria-label')
+                link.getAttribute('aria-label'),
+                link.getAttribute('data-title')
             );
         });
     });

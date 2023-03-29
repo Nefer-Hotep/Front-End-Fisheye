@@ -89,12 +89,12 @@ function displayMedia(medias) {
 
 // Gère l'affichage du total de likes
 function displayTotalLikes(medias) {
-    const stickyEl = document.querySelector('.sticky-text');
+    const stickyEl = document.querySelector('.total-likes');
     const totalLikesEl = document.createElement('p');
     const heartEl = document.createElement('i');
 
     heartEl.setAttribute('class', 'fa-solid fa-heart');
-    totalLikesEl.setAttribute('class', 'total-likes');
+    // totalLikesEl.setAttribute('class', 'total-likes');
 
     stickyEl.appendChild(totalLikesEl);
     stickyEl.appendChild(heartEl);
@@ -109,7 +109,7 @@ function displayTotalLikes(medias) {
 
 // Met à jour le total de like
 function updateTotalLikes(change) {
-    const totalLikesElement = document.querySelector('.total-likes');
+    const totalLikesElement = document.querySelector('.total-likes p');
     const currentTotalLikes = parseInt(totalLikesElement.textContent, 10); // transforme le total d'une string en un interger
     totalLikesElement.textContent = currentTotalLikes + change;
 }

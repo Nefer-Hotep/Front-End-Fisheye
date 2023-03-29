@@ -12,11 +12,11 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
-        <link rel="stylesheet" href="/css/lightbox.css">
+        <link rel="stylesheet" href="/css/lightbox.css" />
         <title>Fisheye - photographe</title>
     </head>
     <body>
-        <header id="header" aria-hidden="false>
+        <header id="header" aria-hidden="false">
             <a href="/index.html">
                 <img
                     src="assets/images/logo.png"
@@ -37,44 +37,50 @@
             <div class="modal">
                 <header>
                     <h2 id="modalTitle">Contactez-moi</h2>
-                    <button class="modal-close-btn" onclick="closeModal()" aria-label="Close Contact form">
-                        <img src="assets/icons/close.svg" alt=""/>
+                    <button
+                        class="modal-close-btn"
+                        onclick="closeModal()"
+                        aria-label="Close Contact form"
+                    >
+                        <img src="assets/icons/close.svg" alt="" />
                     </button>
                 </header>
-                <form action="photographer.html" onsubmit="return validate()">
-                  <div>
-                      <label for="firstName">Prénom</label>
-                      <input
-                          type="text"
-                          id="firstName"
-                          aria-labelledby="firstName"
-                      />
-                  </div>
-                  <div>
-                      <label for="lastName">Nom</label>
-                      <input
-                          type="text"
-                          id="lastName"
-                          aria-labelledby="lastName"
-                      />
-                  </div>
-                  <div>
-                      <label for="email">Email</label>
-                      <input
-                          type="email"
-                          id="email"
-                          aria-labelledby="email"
-                      />
-                  </div>
-                  <div>
-                      <label for="yourMessage">Votre message</label>
-                      <textarea
-                          type="text"
-                          id="yourMessage"
-                          aria-labelledby="yourMessage"
-                      ></textarea>
-                  </div>
-                  <button class="contact_button" aria-label="Send">Envoyer</button>
+                <form action="photographer.html" id="contactForm">
+                    <div>
+                        <label for="firstName">Prénom</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            aria-labelledby="firstName"
+                        />
+                    </div>
+                    <div>
+                        <label for="lastName">Nom</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            aria-labelledby="lastName"
+                        />
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            aria-labelledby="email"
+                        />
+                    </div>
+                    <div>
+                        <label for="yourMessage">Votre message</label>
+                        <textarea
+                            type="text"
+                            id="yourMessage"
+                            aria-labelledby="yourMessage"
+                        ></textarea>
+                    </div>
+                    <button class="contact_button" aria-label="Send">
+                        Envoyer
+                    </button>
                 </form>
             </div>
         </div>
