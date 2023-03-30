@@ -11,7 +11,7 @@
 
 .lightbox-next,
 .lightbox-prev {
-    background: url(/assets/icons/arrow.svg) center center / 30px 48px no-repeat;
+    background: url(../assets/icons/arrow.svg) center center / 30px 48px no-repeat;
     width: 30px;
     height: 100%;
     top: 0;
@@ -30,7 +30,7 @@
     right: 50px;
     width: 42px;
     height: 42px;
-    background: url(/assets/icons/close-lightbox.svg) center center / 100% 100%;
+    background: url(../assets/icons/close-lightbox.svg) center center / 100% 100%;
 }
 
 .lightbox button {
