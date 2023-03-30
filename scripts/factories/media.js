@@ -1,8 +1,8 @@
 function mediaFactory(mediaData, updateTotalLikes) {
   const { title, image, video, likes, photographerId } = mediaData
 
-  const mediaPic = `/assets/media/${photographerId}/${image}`
-  const mediaVid = `/assets/media/${photographerId}/${video}`
+  const mediaPic = `./assets/media/${photographerId}/${image}`
+  const mediaVid = `./assets/media/${photographerId}/${video}`
 
   let currentLikes = likes
   let isLiked = false
