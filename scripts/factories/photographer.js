@@ -17,7 +17,7 @@ function photographerFactory(data) {
     // attributes
     img.setAttribute('src', picture)
     img.setAttribute('alt', '')
-    linkElem.setAttribute('href', `/photographer.html?=${id}`)
+    linkElem.setAttribute('href', `./photographer.html?=${id}`)
     linkElem.setAttribute('data-id', id)
     textCard.setAttribute('class', 'card-text')
     locationElem.setAttribute('class', 'card-location')
