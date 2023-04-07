@@ -41,9 +41,9 @@ function displayMedia(medias) {
   selectEl.innerHTML = `
     <label for="sort-menu">Trier par </label>
     <select id="sort-menu">
-    <option value="popularity">Popularité</option>
-    <option value="date">Date</option>
-    <option value="title">Titre</option>
+      <option value="popularity">Popularité</option>
+      <option value="date">Date</option>
+      <option value="title">Titre</option>
     </select>
     `
 
@@ -56,8 +56,10 @@ function displayMedia(medias) {
     const selectedValue = sortMenu.value
 
     if (selectedValue === 'popularity') {
+      // Sort() trie les éléments d'un tableau.
       medias.sort((a, b) => b.likes - a.likes)
     } else if (selectedValue === 'date') {
+      // localeCompare() compare les caractères selon l'orde lexical
       medias.sort((a, b) => a.date.localeCompare(b.date))
     } else if (selectedValue === 'title') {
       medias.sort((a, b) => a.title.localeCompare(b.title))

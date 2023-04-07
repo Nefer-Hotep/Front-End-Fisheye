@@ -48,22 +48,37 @@
         <form action="photographer.html" id="contactForm">
           <div>
             <label for="firstName">Prénom</label>
-            <input type="text" id="firstName" aria-labelledby="firstName" />
+            <input
+              type="text"
+              id="firstName"
+              aria-labelledby="firstName"
+              minlength="2"
+              required
+            />
           </div>
           <div>
             <label for="lastName">Nom</label>
-            <input type="text" id="lastName" aria-labelledby="lastName" />
+            <input
+              type="text"
+              id="lastName"
+              aria-labelledby="lastName"
+              minlength="2"
+              required
+            />
           </div>
           <div>
             <label for="email">Email</label>
-            <input type="email" id="email" aria-labelledby="email" />
+            <input
+              type="email"
+              id="email"
+              aria-labelledby="email"
+              minlength="2"
+              required
+            />
           </div>
           <div>
             <label for="yourMessage">Votre message</label>
-            <textarea
-              id="yourMessage"
-              aria-labelledby="yourMessage"
-            ></textarea>
+            <textarea id="yourMessage" aria-labelledby="yourMessage"></textarea>
           </div>
           <button class="contact_button" aria-label="Send">Envoyer</button>
         </form>

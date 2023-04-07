@@ -17,8 +17,23 @@ function lightbox() {
   //
   // FUNCTION
   //
-  function closeLightbox() {
-    lightboxDom.remove()
+
+  function removeListeners() {
+    lightboxDom.removeEventListener('keydown', handleKeydown)
+  }
+
+  // Gère la logique des interactions clavier
+  function handleKeydown(e) {
+    if (e.key === 'Escape') {
+      closeLightbox()
+      e.preventDefault()
+    } else if (e.key === 'ArrowRight') {
+      changeMedia(getCurrentMediaUrl(), 1)
+      e.preventDefault()
+    } else if (e.key === 'ArrowLeft') {
+      changeMedia(getCurrentMediaUrl(), -1)
+      e.preventDefault()
+    }
   }
 
   // Change de média selon la direction donnée (1 || -1)
@@ -44,7 +59,7 @@ function lightbox() {
 
     // Vérifie le type de média et renvoi un element
     const mediaElement = mediaUrl.endsWith('.mp4')
-      ? `<video controls><source src="${mediaUrl}" type="video/mp4"></video>`
+      ? `<video controls autoplay muted><source src="${mediaUrl}" type="video/mp4"></video>`
       : `<img src="${mediaUrl}" alt="${mediaAlt}">`
 
     lightboxDom.innerHTML = `
@@ -60,14 +75,17 @@ function lightbox() {
     // Ecoute le bouton NEXT
     lightboxDom.querySelector('.lightbox-next').addEventListener(
       'click',
-      () => changeMedia(getCurrentMediaUrl(), 1)
       // Récupère le currentMédiaUrl et la direction
+      () => changeMedia(getCurrentMediaUrl(), 1)
     )
+    
     // Ecoute le bouton PREV
     lightboxDom.querySelector('.lightbox-prev').addEventListener(
       'click',
-      () => changeMedia(getCurrentMediaUrl(), -1) // Récupère le currentMédiaUrl et la direction
+      // Récupère le currentMédiaUrl et la direction
+      () => changeMedia(getCurrentMediaUrl(), -1)
     )
+
     // Ecoute le bouton CLOSE
     lightboxDom
       .querySelector('.lightbox-close')
@@ -77,18 +95,17 @@ function lightbox() {
     // Place le focus sur le bouton next
     const lightboxClose = document.querySelector('.lightbox-next')
     lightboxClose.focus()
+
+    // Ajout d'un listener sur les touches du clavier
+    lightboxDom.addEventListener('keydown', handleKeydown)
   }
 
-  // Gère les interactions clavier
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeLightbox()
-    } else if (e.key === 'ArrowRight') {
-      changeMedia(getCurrentMediaUrl(), 1)
-    } else if (e.key === 'ArrowLeft') {
-      changeMedia(getCurrentMediaUrl(), -1)
-    }
-  })
+  function closeLightbox() {
+    lightboxDom.remove()
+    mainWrapper.setAttribute('aria-hidden', false)
+    header.setAttribute('aria-hidden', false)
+    removeListeners()
+  }
 
   // Récupère le média a l'intéraction de la lightbox
   function getCurrentMediaUrl() {
