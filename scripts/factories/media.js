@@ -1,8 +1,8 @@
 function mediaFactory(mediaData, updateTotalLikes) {
   const { title, image, video, likes, photographerId } = mediaData
 
-  const mediaPic = `/assets/media/${photographerId}/${image}`
-  const mediaVid = `/assets/media/${photographerId}/${video}`
+  const mediaPic = `./assets/media/${photographerId}/${image}`
+  const mediaVid = `./assets/media/${photographerId}/${video}`
 
   let currentLikes = likes
   let isLiked = false
@@ -43,7 +43,7 @@ function mediaFactory(mediaData, updateTotalLikes) {
                     <p>${title}</p>
                     <div class='media-likes'>
                         <p>${currentLikes}</p>
-                        <button class='like-btn' aria-label="Like">
+                        <button type="button" class='like-btn' aria-label="Like">
                             <i class="unchecked fa-regular fa-heart fa-lg" ></i>
                         </button>
                     </div>
@@ -58,7 +58,7 @@ function mediaFactory(mediaData, updateTotalLikes) {
                     <p>${title}</p>
                     <div class='media-likes'>
                         <p>${currentLikes}</p>
-                        <button class='like-btn' aria-label="Like">
+                        <button type="button" class='like-btn' aria-label="Like">
                             <i class="unchecked fa-regular fa-heart fa-lg" ></i>
                         </button>
                     </div>
